@@ -7,10 +7,13 @@
     <MudNavLink Href="fetchdata" Match="NavLinkMatch.Prefix" Icon="@Icons.Sharp.List">Fetch data</MudNavLink>
  *@
     <MudNavLink Href="" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Home">Home</MudNavLink>
+    <MudNavLink Href="ServerOverview" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Apps">Server Overview</MudNavLink>
+    <MudNavLink Href="Mission/MissionOverview" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Apps">Mission Overview</MudNavLink>
+
     <MudNavLink Href="mods" Match="NavLinkMatch.Prefix" Icon="@Icons.Custom.Brands.Steam">Mods</MudNavLink>
     @if (servers != null && servers.Count > 0)
     {
-        <MudNavGroup Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Sharp.Storage" Title="Servers" Expanded=true>
+        <MudNavGroup Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Sharp.Storage" Title="Servers" Expanded=false>
             @foreach (var server in servers)
             {
                 <MudNavLink Href="@("/server/" + server.Id)" Icon="@Icons.Material.Sharp.Terminal">@server.Name</MudNavLink>
