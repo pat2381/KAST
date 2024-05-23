@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\KAST.Core\KAST.Core.csproj" />
+    <ProjectReference Include="..\KAST.Infratructure\KAST.Infratructure.csproj" />
   </ItemGroup>
 
 </Project>

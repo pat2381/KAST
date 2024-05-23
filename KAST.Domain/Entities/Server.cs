@@ -1,4 +1,4 @@
-﻿namespace KAST.Data.Models
+﻿namespace KAST.Domain.Entities
 {
     public class Server
     {

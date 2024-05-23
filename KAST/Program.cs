@@ -1,9 +1,9 @@
-using KAST.Core;
-using KAST.Core.Services;
-using KAST.Data;
+
 using Microsoft.AspNetCore.Hosting.StaticWebAssets;
-using Microsoft.EntityFrameworkCore;
+using KAST.Infratructure.DependencyInjection;
+
 using MudBlazor.Services;
+using KAST.Application.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,7 +17,7 @@ builder.Services.AddSingleton<ServerInfoService>();
 builder.Services.AddMudServices();
 
 
-builder.Services.AddDbContext<ApplicationDbContext>();
+builder.Services.AddInfratruture(builder.Configuration);
 
 
 
@@ -33,25 +33,25 @@ if (!app.Environment.IsDevelopment())
 
 
 
-using (IServiceScope serviceScope = app.Services.CreateScope())
-{
-    //Apply last Entity Framework migration
-    try
-    {
-        ApplicationDbContext context = serviceScope.ServiceProvider.GetService<ApplicationDbContext>();
+//using (IServiceScope serviceScope = app.Services.CreateScope())
+//{
+//    //Apply last Entity Framework migration
+//    try
+//    {
+//        ApplicationDbContext context = serviceScope.ServiceProvider.GetService<ApplicationDbContext>();
 
-        if (app.Environment.IsDevelopment())
-        {
-            context.Database.EnsureDeleted();
-            context.Database.EnsureCreated();
-        }
-        else
-            context.Database.Migrate();
+//        if (app.Environment.IsDevelopment())
+//        {
+//            context.Database.EnsureDeleted();
+//            context.Database.EnsureCreated();
+//        }
+//        else
+//            context.Database.Migrate();
 
-        context.EnsureSeedData();
-    }
-    catch (Exception) { throw; }
-}
+//        context.EnsureSeedData();
+//    }
+//    catch (Exception) { throw; }
+//}
 
 app.UseHttpsRedirection();
 
