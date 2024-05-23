@@ -37,7 +37,9 @@
     <MudCard>
         <MudCardHeader>
             <CardHeaderAvatar>
-                <MudAvatar Color="Color.Secondary">I</MudAvatar>
+                <MudBadge Color="Color.Error" Icon="@Icons.Material.Filled.Remove" Overlap="true" Bordered="true">
+                    <MudAvatar Color="Color.Secondary">I</MudAvatar>
+                </MudBadge>
             </CardHeaderAvatar>
             <CardHeaderContent>
                 <MudText Typo="Typo.body1">Istra Croatia</MudText>
@@ -52,12 +54,15 @@
             <MudText Typo="Typo.body2">This photo was taken in a small village in Istra Croatia.</MudText>
         </MudCardContent>
         <MudCardActions>
-
-            <MudButton Variant="Variant.Text" Color="Color.Primary">Anmelden</MudButton>
+            <MudTooltip Text="Zur Mission anmelden">
+                <MudButton Variant="Variant.Text" Color="Color.Primary">Anmelden</MudButton>
+            </MudTooltip>
             <MudSpacer />
             <MudIconButton Icon="@Icons.Material.Filled.Favorite" Color="Color.Default" />
             <MudIconButton Icon="@Icons.Material.Filled.Share" Color="Color.Default" />
-            <MudIconButton Icon="@Icons.Material.Filled.Download" Color="Color.Success"  />
+            <MudTooltip Text="Download Mission">
+                <MudIconButton Icon="@Icons.Material.Filled.Download" Color="Color.Success"  />
+            </MudTooltip>
 
         </MudCardActions>
     </MudCard>

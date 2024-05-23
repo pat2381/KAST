@@ -16,6 +16,15 @@ namespace KAST.Infratructure.Data
             Database.EnsureCreated();
         }
 
+        public DbSet<Mission> Missions { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<MissionUser> MissionUsers { get; set; }
+        public DbSet<Faction> Factions { get; set; }
+        public DbSet<Squad> Squads { get; set; }
+        public DbSet<Slot> Slots { get; set; }
+        public DbSet<Fireteam> Fireteams { get; set; }
+
+
         public DbSet<Server> Servers { get; set; }
 
 

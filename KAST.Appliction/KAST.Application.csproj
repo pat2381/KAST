@@ -15,8 +15,4 @@
     <ProjectReference Include="..\KAST.Domain\KAST.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Data\" />
-  </ItemGroup>
-
 </Project>

@@ -15,13 +15,10 @@ namespace KAST.Infratructure.DependencyInjection
         {
             //Add Infratrucure servcies.
 
-            var connectionString = configuration.GetConnectionString("DefaultConnection");
+            var connectionString = configuration.GetConnectionString("DefaultString");
 
             services.AddDbContext<ApplicationDbContext>((sp, options) =>
             {
-                
-
-
                 options.UseSqlite(connectionString);
 
             });
