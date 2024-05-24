@@ -6,7 +6,7 @@
 <MudText Class="mb-8">This component demonstrates fetching data from the server.</MudText>
 
 <MudLayout Class="d-flex justify-start flex-grow-1 gap-4" Elevation="0">
-    <MudCard>
+    <MudCard Class="rounded-lg">
         <MudCardHeader>
             <CardHeaderAvatar>
                 <MudAvatar Color="Color.Secondary">I</MudAvatar>
@@ -34,7 +34,7 @@
         </MudCardActions>
     </MudCard>
 
-    <MudCard>
+    <MudCard Class="rounded-lg">
         <MudCardHeader>
             <CardHeaderAvatar>
                 <MudBadge Color="Color.Error" Icon="@Icons.Material.Filled.Remove" Overlap="true" Bordered="true">
@@ -49,7 +49,7 @@
                 <MudIconButton Icon="@Icons.Material.Filled.Settings" Color="Color.Default" />
             </CardHeaderActions>
         </MudCardHeader>
-        <MudCardMedia Image="image/mission/19.jpg" Height="250" />
+        <MudCardMedia Class="object-contain" Image="image/mission/19.jpg" Height="250" />
         <MudCardContent>
             <MudText Typo="Typo.body2">This photo was taken in a small village in Istra Croatia.</MudText>
         </MudCardContent>

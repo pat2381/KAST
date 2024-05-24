@@ -1,6 +1,6 @@
 ﻿
 @using KAST.Domain.Entities
-<MudNavMenu>
+<MudNavMenu Color="Color.Info" Bordered="true">
 
 @*     <MudNavLink Href="" Match="NavLinkMatch.All" Icon="@Icons.Sharp.Home">Home</MudNavLink>
     <MudNavLink Href="counter" Match="NavLinkMatch.Prefix" Icon="@Icons.Sharp.Add">Counter</MudNavLink>
@@ -25,10 +25,12 @@
 
 <MudSpacer />
 
-<MudNavMenu>
-    <MudNavLink Href="serverinfos" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Sharp.Computer">Server Status</MudNavLink>
-    <MudNavLink Href="infos" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Sharp.Info">Informations</MudNavLink>
-    <MudNavLink Href="settings" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Sharp.Settings">Settings</MudNavLink>
+<MudNavMenu Rounded="true">
+    <MudNavLink Href="serverinfos" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Sharp.Computer" IconColor="Color.Primary">Server Status</MudNavLink>
+    <MudNavLink Href="infos" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Sharp.Info" IconColor="Color.Primary">Informations</MudNavLink>
+    <MudNavLink Href="settings" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Sharp.Settings" IconColor="Color.Primary">Settings</MudNavLink>
+    <MudDivider/>
+    <MudNavLink Href="settings" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Logout" IconColor="Color.Secondary">Abmelden</MudNavLink>
 </MudNavMenu>
 
 @code
