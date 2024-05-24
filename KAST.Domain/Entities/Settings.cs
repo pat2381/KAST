@@ -4,7 +4,7 @@ namespace KAST.Domain.Entities
 {
     public class Settings
     {
-        [Key]
+     
         public Guid Id { get; set; }
 
         public string? ModFolderPath {  get; set; }

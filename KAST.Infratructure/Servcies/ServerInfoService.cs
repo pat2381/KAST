@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Runtime.Versioning;
 
-namespace KAST.Application.Services
+namespace KAST.Infratructure.Services
 {
     public class ServerInfoService
     {

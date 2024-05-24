@@ -4,6 +4,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore.Sqlite;
 using Microsoft.EntityFrameworkCore.SqlServer;
 using Microsoft.EntityFrameworkCore;
+using KAST.Application.Repositories;
+using KAST.Infratructure.Data.Repositories;
+using KAST.Infratructure.Interfaces;
+using KAST.Infratructure.Servcies;
 
 
 namespace KAST.Infratructure.DependencyInjection
@@ -22,8 +26,11 @@ namespace KAST.Infratructure.DependencyInjection
                 options.UseSqlite(connectionString);
 
             });
-            
-          
+
+
+            services.AddScoped<IRepositoryService, RepositoryService>();
+            services.AddScoped<IKastService, KastService>();
+
             return services;
         }
     }

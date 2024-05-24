@@ -1,17 +1,24 @@
 ﻿@page "/mods"
-@* @using KAST.Data.Enums;
-@using KAST.Data.Models;
-@using KAST.Core.Services;
-@using KAST.Server.Data;
-@inject ModsService ModsService
-@inject SteamService SteamService *@
+@using KAST.Domain.Entities
+@using KAST.Domain.Enums
+@using KAST.Infratructure.Servcies
+
 @inject ISnackbar Snackbar
+@inject KastService KastService
+
+
 
 <PageTitle>Mods</PageTitle>
 
 <MudText Typo="Typo.h3" GutterBottom="true">Mods</MudText>
 <MudText Class="mb-8">This component demonstrates fetching data from the server.</MudText>
-@* @if (localMods == null || steamMods == null)
+
+<MudPaper Class="mb-10">
+     <MudChip Class="ma-3" Icon="@Icons.Material.Filled.Add" Color="Color.Success">Add Mod</MudChip>
+</MudPaper>
+
+@* 
+ @if (localMods == null || steamMods == null)
 {
     <MudProgressCircular Color="MudBlazor.Color.Default" Indeterminate="true" />
 }
@@ -109,7 +116,7 @@ else
             <MudTablePager PageSizeOptions="new int[]{50, 100}" />
         </PagerContent>
     </MudTable>
-} *@
+}  *@
 
 
 @code {
@@ -120,6 +127,8 @@ else
 
     // async Task GetModInfos(SteamMod mod)
     // {
+        
+
     //     modContext[mod.Id].GetStatus = QueryStatus.Progress;
     //     mod.Status = ModStatus.Progress;
     //     try
@@ -181,6 +190,8 @@ else
 
     // protected override async Task OnInitializedAsync()
     // {
+
+
     //     steamMods = await ModsService.GetSteamModsAsync();
     //     localMods = await ModsService.GetLocalModsAsync();
     //     modContext.Clear();

@@ -16,6 +16,8 @@ namespace KAST.Infratructure.Data
             Database.EnsureCreated();
         }
 
+
+        public DbSet<Author> Authors { get; set; }
         public DbSet<Mission> Missions { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<MissionUser> MissionUsers { get; set; }
@@ -23,10 +25,10 @@ namespace KAST.Infratructure.Data
         public DbSet<Squad> Squads { get; set; }
         public DbSet<Slot> Slots { get; set; }
         public DbSet<Fireteam> Fireteams { get; set; }
-
-
+        public DbSet<Mod> Mods { get; set; }
         public DbSet<Server> Servers { get; set; }
 
+        
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -11,7 +11,7 @@ namespace KAST.Domain.Entities
 {
     public class Faction : BaseEntity
     {
-       
+        public Guid FactionId { get; set; }
 
         [Display(Name = "Flagge")]
         public string? Flag { get; set; }

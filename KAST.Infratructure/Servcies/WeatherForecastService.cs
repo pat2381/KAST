@@ -1,6 +1,6 @@
 using KAST.Domain.Entities;
 
-namespace KAST.Application.Services
+namespace KAST.Infratructure.Services
 {
     public class WeatherForecastService
     {

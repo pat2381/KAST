@@ -10,10 +10,10 @@ namespace KAST.Domain.Entities
 {
     public class MissionUser : BaseEntity
     {
-        //ID in BaseEntity
+        public Guid MissionUserId { get; set; }
 
         [Display(Name = "Squad")]
-        public int? SquadID { get; set; }
+        public Guid SquadID { get; set; }
 
         [Display(Name = "Squad")]
         public Squad? Side { get; set; }
@@ -21,13 +21,13 @@ namespace KAST.Domain.Entities
         public List<Slot>? Slots { get; set; }
 
         [Display(Name = "Operation")]
-        public int MissionID { get; set; }
+        public Guid MissionID { get; set; }
 
         [Display(Name = "Operation")]
         public Mission? Mission { get; set; }
 
         [Display(Name = "Eingetragen")]
-        public int UserID { get; set; }
+        public Guid UserID { get; set; }
 
         [Display(Name = "Eingetragen")]
         public User? User { get; set; }

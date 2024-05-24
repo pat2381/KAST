@@ -11,7 +11,7 @@ namespace KAST.Domain.Entities
 {
     public class Mission : BaseEntity
     {
-        //ID in BaseEntity
+        public Guid MissionId { get; set; }
         public string? Name { get; set; }
         public string? ImageUrl { get; set; }
         public DateTimeOffset MissionDate { get; set; }

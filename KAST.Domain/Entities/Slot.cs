@@ -10,16 +10,16 @@ namespace KAST.Domain.Entities
 {
     public class Slot : BaseEntity
     {
-       
+        public Guid SlotId { get; set; }
         public int SlotNumber { get; set; }
 
         public string? Label { get; set; }
 
-        public int FireteamID { get; set; }
+        public Guid FireteamID { get; set; }
         public Fireteam? Fireteam { get; set; }
 
-        public int? MissionUserID { get; set; }
-        public MissionUser AssignedUser { get; set; }
+        public Guid? MissionUserID { get; set; }
+        public MissionUser? AssignedUser { get; set; }
 
         public long? Timestamp { get; set; }
 

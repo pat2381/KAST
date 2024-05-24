@@ -9,7 +9,7 @@ namespace KAST.Application.Repositories
 {
     public interface IMissionRepository : IBaseRepository<Mission>
     {
-
+        
 
 
     }

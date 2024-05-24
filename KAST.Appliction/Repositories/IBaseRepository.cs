@@ -13,8 +13,8 @@ namespace KAST.Application.Repositories
         void Update(T entity);
         void Delete(T entity);
 
-        Task<T> Get(int id, CancellationToken cancellationToken);
-        Task<List<T>> GetAll(CancellationToken cancellationToken);
+        Task<T> Get(int id, CancellationToken cancellationToken = default);
+        Task<List<T>> GetAll(CancellationToken cancellationToken = default);
 
 
     }

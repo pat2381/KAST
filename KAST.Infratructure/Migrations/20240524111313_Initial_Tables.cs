@@ -6,17 +6,32 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace KAST.Infratructure.Migrations
 {
     /// <inheritdoc />
-    public partial class Inital_Mission_Tables : Migration
+    public partial class Initial_Tables : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Authors",
+                columns: table => new
+                {
+                    AuthorId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Name = table.Column<string>(type: "TEXT", nullable: true),
+                    URL = table.Column<string>(type: "TEXT", nullable: true),
+                    Created = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
+                    Updated = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
+                    Delete = table.Column<DateTimeOffset>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Authors", x => x.AuthorId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Factions",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                    FactionId = table.Column<Guid>(type: "TEXT", nullable: false),
                     Flag = table.Column<string>(type: "TEXT", nullable: true),
                     Name = table.Column<string>(type: "TEXT", nullable: true),
                     UseSide = table.Column<int>(type: "INTEGER", nullable: false),
@@ -26,15 +41,14 @@ namespace KAST.Infratructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Factions", x => x.Id);
+                    table.PrimaryKey("PK_Factions", x => x.FactionId);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Missions",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                    MissionId = table.Column<Guid>(type: "TEXT", nullable: false),
                     Name = table.Column<string>(type: "TEXT", nullable: true),
                     ImageUrl = table.Column<string>(type: "TEXT", nullable: true),
                     MissionDate = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
@@ -53,7 +67,7 @@ namespace KAST.Infratructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Missions", x => x.Id);
+                    table.PrimaryKey("PK_Missions", x => x.MissionId);
                 });
 
             migrationBuilder.CreateTable(
@@ -73,8 +87,7 @@ namespace KAST.Infratructure.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                    UserId = table.Column<Guid>(type: "TEXT", nullable: false),
                     Username = table.Column<string>(type: "TEXT", nullable: true),
                     Password = table.Column<string>(type: "TEXT", nullable: true),
                     EMail = table.Column<string>(type: "TEXT", nullable: true),
@@ -91,40 +104,69 @@ namespace KAST.Infratructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Users", x => x.Id);
+                    table.PrimaryKey("PK_Users", x => x.UserId);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Squads",
+                name: "Mods",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    MissionID = table.Column<int>(type: "INTEGER", nullable: false),
+                    ModId = table.Column<Guid>(type: "TEXT", nullable: false),
                     Name = table.Column<string>(type: "TEXT", nullable: true),
-                    Number = table.Column<int>(type: "INTEGER", nullable: false),
-                    MaxUsuerCount = table.Column<int>(type: "INTEGER", nullable: false),
-                    SquadPolicy = table.Column<int>(type: "INTEGER", nullable: false),
-                    GameSide = table.Column<int>(type: "INTEGER", nullable: false),
-                    FactionID = table.Column<int>(type: "INTEGER", nullable: false),
+                    Path = table.Column<string>(type: "TEXT", nullable: true),
+                    IsLocal = table.Column<bool>(type: "INTEGER", nullable: false),
+                    Status = table.Column<int>(type: "INTEGER", nullable: true),
+                    ActualSize = table.Column<ulong>(type: "INTEGER", nullable: false),
+                    AuthorId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    SteamID = table.Column<ulong>(type: "INTEGER", nullable: false),
+                    Url = table.Column<string>(type: "TEXT", nullable: true),
+                    SteamLastUpdated = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    LocalLastUpdated = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    ExpectedSize = table.Column<ulong>(type: "INTEGER", nullable: true),
                     Created = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
                     Updated = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
                     Delete = table.Column<DateTimeOffset>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Squads", x => x.Id);
+                    table.PrimaryKey("PK_Mods", x => x.ModId);
+                    table.ForeignKey(
+                        name: "FK_Mods_Authors_AuthorId",
+                        column: x => x.AuthorId,
+                        principalTable: "Authors",
+                        principalColumn: "AuthorId");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Squads",
+                columns: table => new
+                {
+                    SquadId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    MissionID = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Name = table.Column<string>(type: "TEXT", nullable: true),
+                    Number = table.Column<int>(type: "INTEGER", nullable: false),
+                    MaxUsuerCount = table.Column<int>(type: "INTEGER", nullable: false),
+                    SquadPolicy = table.Column<int>(type: "INTEGER", nullable: false),
+                    GameSide = table.Column<int>(type: "INTEGER", nullable: false),
+                    FactionID = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Created = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
+                    Updated = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
+                    Delete = table.Column<DateTimeOffset>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Squads", x => x.SquadId);
                     table.ForeignKey(
                         name: "FK_Squads_Factions_FactionID",
                         column: x => x.FactionID,
                         principalTable: "Factions",
-                        principalColumn: "Id",
+                        principalColumn: "FactionId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Squads_Missions_MissionID",
                         column: x => x.MissionID,
                         principalTable: "Missions",
-                        principalColumn: "Id",
+                        principalColumn: "MissionId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -132,13 +174,12 @@ namespace KAST.Infratructure.Migrations
                 name: "Fireteams",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                    FireteamId = table.Column<Guid>(type: "TEXT", nullable: false),
                     Index = table.Column<int>(type: "INTEGER", nullable: false),
                     Name = table.Column<string>(type: "TEXT", nullable: true),
                     RestrictTeamCompoition = table.Column<bool>(type: "INTEGER", nullable: false),
                     InviteOnly = table.Column<bool>(type: "INTEGER", nullable: false),
-                    SquadId = table.Column<int>(type: "INTEGER", nullable: false),
+                    SquadId = table.Column<Guid>(type: "TEXT", nullable: false),
                     SlotsCount = table.Column<int>(type: "INTEGER", nullable: false),
                     Created = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
                     Updated = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
@@ -146,12 +187,12 @@ namespace KAST.Infratructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Fireteams", x => x.Id);
+                    table.PrimaryKey("PK_Fireteams", x => x.FireteamId);
                     table.ForeignKey(
                         name: "FK_Fireteams_Squads_SquadId",
                         column: x => x.SquadId,
                         principalTable: "Squads",
-                        principalColumn: "Id",
+                        principalColumn: "SquadId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -159,34 +200,34 @@ namespace KAST.Infratructure.Migrations
                 name: "MissionUsers",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    SquadID = table.Column<int>(type: "INTEGER", nullable: true),
-                    MissionID = table.Column<int>(type: "INTEGER", nullable: false),
-                    UserID = table.Column<int>(type: "INTEGER", nullable: false),
+                    MissionUserId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    SquadID = table.Column<Guid>(type: "TEXT", nullable: false),
+                    MissionID = table.Column<Guid>(type: "TEXT", nullable: false),
+                    UserID = table.Column<Guid>(type: "TEXT", nullable: false),
                     Created = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
                     Updated = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
                     Delete = table.Column<DateTimeOffset>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MissionUsers", x => x.Id);
+                    table.PrimaryKey("PK_MissionUsers", x => x.MissionUserId);
                     table.ForeignKey(
                         name: "FK_MissionUsers_Missions_MissionID",
                         column: x => x.MissionID,
                         principalTable: "Missions",
-                        principalColumn: "Id",
+                        principalColumn: "MissionId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_MissionUsers_Squads_SquadID",
                         column: x => x.SquadID,
                         principalTable: "Squads",
-                        principalColumn: "Id");
+                        principalColumn: "SquadId",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_MissionUsers_Users_UserID",
                         column: x => x.UserID,
                         principalTable: "Users",
-                        principalColumn: "Id",
+                        principalColumn: "UserId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -194,12 +235,11 @@ namespace KAST.Infratructure.Migrations
                 name: "Slots",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                    SlotId = table.Column<Guid>(type: "TEXT", nullable: false),
                     SlotNumber = table.Column<int>(type: "INTEGER", nullable: false),
                     Label = table.Column<string>(type: "TEXT", nullable: true),
-                    FireteamID = table.Column<int>(type: "INTEGER", nullable: false),
-                    MissionUserID = table.Column<int>(type: "INTEGER", nullable: true),
+                    FireteamID = table.Column<Guid>(type: "TEXT", nullable: false),
+                    MissionUserID = table.Column<Guid>(type: "TEXT", nullable: true),
                     Timestamp = table.Column<long>(type: "INTEGER", nullable: true),
                     Role = table.Column<int>(type: "INTEGER", nullable: true),
                     IsValideted = table.Column<bool>(type: "INTEGER", nullable: false),
@@ -209,18 +249,18 @@ namespace KAST.Infratructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Slots", x => x.Id);
+                    table.PrimaryKey("PK_Slots", x => x.SlotId);
                     table.ForeignKey(
                         name: "FK_Slots_Fireteams_FireteamID",
                         column: x => x.FireteamID,
                         principalTable: "Fireteams",
-                        principalColumn: "Id",
+                        principalColumn: "FireteamId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Slots_MissionUsers_MissionUserID",
                         column: x => x.MissionUserID,
                         principalTable: "MissionUsers",
-                        principalColumn: "Id");
+                        principalColumn: "MissionUserId");
                 });
 
             migrationBuilder.CreateIndex(
@@ -242,6 +282,11 @@ namespace KAST.Infratructure.Migrations
                 name: "IX_MissionUsers_UserID",
                 table: "MissionUsers",
                 column: "UserID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Mods_AuthorId",
+                table: "Mods",
+                column: "AuthorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Slots_FireteamID",
@@ -268,10 +313,16 @@ namespace KAST.Infratructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "Mods");
+
+            migrationBuilder.DropTable(
                 name: "Servers");
 
             migrationBuilder.DropTable(
                 name: "Slots");
+
+            migrationBuilder.DropTable(
+                name: "Authors");
 
             migrationBuilder.DropTable(
                 name: "Fireteams");

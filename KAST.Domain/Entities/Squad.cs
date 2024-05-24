@@ -11,9 +11,8 @@ namespace KAST.Domain.Entities
 {
     public class Squad : BaseEntity
     {
-        //ID in BaseEntity
-
-        public int MissionID { get; set; }
+        public Guid SquadId { get; set; }
+        public Guid MissionID { get; set; }
         public Mission? Mission { get; set; }
         public string? Name { get; set; }
         public List<MissionUser>? MissionUsers { get; set; }
@@ -22,7 +21,7 @@ namespace KAST.Domain.Entities
         public int MaxUsuerCount { get; set; }
         public SquadsPolicy SquadPolicy { get; set; }
         public GameSide GameSide { get; set; }
-        public int FactionID { get; set; }
+        public Guid FactionID { get; set; }
         public Faction? Faction { get; set; }
 
     }

@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Hosting.StaticWebAssets;
 using KAST.Infratructure.DependencyInjection;
 
 using MudBlazor.Services;
-using KAST.Application.Services;
+using KAST.Infratructure.Services;
 using KAST.Infratructure.Data;
 using Microsoft.EntityFrameworkCore;
 

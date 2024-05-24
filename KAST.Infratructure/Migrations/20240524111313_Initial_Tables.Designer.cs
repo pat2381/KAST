@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KAST.Infratructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240523203105_Inital_Mission_Tables")]
-    partial class Inital_Mission_Tables
+    [Migration("20240524111313_Initial_Tables")]
+    partial class Initial_Tables
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -20,11 +20,37 @@ namespace KAST.Infratructure.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.5");
 
+            modelBuilder.Entity("KAST.Domain.Entities.Author", b =>
+                {
+                    b.Property<Guid>("AuthorId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTimeOffset>("Created")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTimeOffset>("Delete")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("URL")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTimeOffset>("Updated")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("AuthorId");
+
+                    b.ToTable("Authors");
+                });
+
             modelBuilder.Entity("KAST.Domain.Entities.Faction", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("FactionId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("TEXT");
 
                     b.Property<DateTimeOffset>("Created")
                         .HasColumnType("TEXT");
@@ -44,16 +70,16 @@ namespace KAST.Infratructure.Migrations
                     b.Property<int>("UseSide")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("Id");
+                    b.HasKey("FactionId");
 
                     b.ToTable("Factions");
                 });
 
             modelBuilder.Entity("KAST.Domain.Entities.Fireteam", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("FireteamId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("TEXT");
 
                     b.Property<DateTimeOffset>("Created")
                         .HasColumnType("TEXT");
@@ -76,13 +102,13 @@ namespace KAST.Infratructure.Migrations
                     b.Property<int>("SlotsCount")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("SquadId")
-                        .HasColumnType("INTEGER");
+                    b.Property<Guid>("SquadId")
+                        .HasColumnType("TEXT");
 
                     b.Property<DateTimeOffset>("Updated")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("Id");
+                    b.HasKey("FireteamId");
 
                     b.HasIndex("SquadId");
 
@@ -91,9 +117,9 @@ namespace KAST.Infratructure.Migrations
 
             modelBuilder.Entity("KAST.Domain.Entities.Mission", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("MissionId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("TEXT");
 
                     b.Property<DateTimeOffset>("Created")
                         .HasColumnType("TEXT");
@@ -140,16 +166,16 @@ namespace KAST.Infratructure.Migrations
                     b.Property<string>("Worldanme")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("Id");
+                    b.HasKey("MissionId");
 
                     b.ToTable("Missions");
                 });
 
             modelBuilder.Entity("KAST.Domain.Entities.MissionUser", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("MissionUserId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("TEXT");
 
                     b.Property<DateTimeOffset>("Created")
                         .HasColumnType("TEXT");
@@ -157,19 +183,19 @@ namespace KAST.Infratructure.Migrations
                     b.Property<DateTimeOffset>("Delete")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("MissionID")
-                        .HasColumnType("INTEGER");
+                    b.Property<Guid>("MissionID")
+                        .HasColumnType("TEXT");
 
-                    b.Property<int?>("SquadID")
-                        .HasColumnType("INTEGER");
+                    b.Property<Guid>("SquadID")
+                        .HasColumnType("TEXT");
 
                     b.Property<DateTimeOffset>("Updated")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("UserID")
-                        .HasColumnType("INTEGER");
+                    b.Property<Guid>("UserID")
+                        .HasColumnType("TEXT");
 
-                    b.HasKey("Id");
+                    b.HasKey("MissionUserId");
 
                     b.HasIndex("MissionID");
 
@@ -178,6 +204,61 @@ namespace KAST.Infratructure.Migrations
                     b.HasIndex("UserID");
 
                     b.ToTable("MissionUsers");
+                });
+
+            modelBuilder.Entity("KAST.Domain.Entities.Mod", b =>
+                {
+                    b.Property<Guid>("ModId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<ulong>("ActualSize")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<Guid?>("AuthorId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTimeOffset>("Created")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTimeOffset>("Delete")
+                        .HasColumnType("TEXT");
+
+                    b.Property<ulong?>("ExpectedSize")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("IsLocal")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime?>("LocalLastUpdated")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Path")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("Status")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<ulong>("SteamID")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime?>("SteamLastUpdated")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTimeOffset>("Updated")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("ModId");
+
+                    b.HasIndex("AuthorId");
+
+                    b.ToTable("Mods");
                 });
 
             modelBuilder.Entity("KAST.Domain.Entities.Server", b =>
@@ -199,9 +280,9 @@ namespace KAST.Infratructure.Migrations
 
             modelBuilder.Entity("KAST.Domain.Entities.Slot", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("SlotId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("TEXT");
 
                     b.Property<DateTimeOffset>("Created")
                         .HasColumnType("TEXT");
@@ -209,8 +290,8 @@ namespace KAST.Infratructure.Migrations
                     b.Property<DateTimeOffset>("Delete")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("FireteamID")
-                        .HasColumnType("INTEGER");
+                    b.Property<Guid>("FireteamID")
+                        .HasColumnType("TEXT");
 
                     b.Property<bool>("IsValideted")
                         .HasColumnType("INTEGER");
@@ -218,8 +299,8 @@ namespace KAST.Infratructure.Migrations
                     b.Property<string>("Label")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("MissionUserID")
-                        .HasColumnType("INTEGER");
+                    b.Property<Guid?>("MissionUserID")
+                        .HasColumnType("TEXT");
 
                     b.Property<int?>("Role")
                         .HasColumnType("INTEGER");
@@ -233,7 +314,7 @@ namespace KAST.Infratructure.Migrations
                     b.Property<DateTimeOffset>("Updated")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("Id");
+                    b.HasKey("SlotId");
 
                     b.HasIndex("FireteamID");
 
@@ -244,9 +325,9 @@ namespace KAST.Infratructure.Migrations
 
             modelBuilder.Entity("KAST.Domain.Entities.Squad", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("SquadId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("TEXT");
 
                     b.Property<DateTimeOffset>("Created")
                         .HasColumnType("TEXT");
@@ -254,8 +335,8 @@ namespace KAST.Infratructure.Migrations
                     b.Property<DateTimeOffset>("Delete")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("FactionID")
-                        .HasColumnType("INTEGER");
+                    b.Property<Guid>("FactionID")
+                        .HasColumnType("TEXT");
 
                     b.Property<int>("GameSide")
                         .HasColumnType("INTEGER");
@@ -263,8 +344,8 @@ namespace KAST.Infratructure.Migrations
                     b.Property<int>("MaxUsuerCount")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("MissionID")
-                        .HasColumnType("INTEGER");
+                    b.Property<Guid>("MissionID")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
@@ -278,7 +359,7 @@ namespace KAST.Infratructure.Migrations
                     b.Property<DateTimeOffset>("Updated")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("Id");
+                    b.HasKey("SquadId");
 
                     b.HasIndex("FactionID");
 
@@ -289,9 +370,9 @@ namespace KAST.Infratructure.Migrations
 
             modelBuilder.Entity("KAST.Domain.Entities.User", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("UserId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("TEXT");
 
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("TEXT");
@@ -332,7 +413,7 @@ namespace KAST.Infratructure.Migrations
                     b.Property<string>("Username")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("Id");
+                    b.HasKey("UserId");
 
                     b.ToTable("Users");
                 });
@@ -358,7 +439,9 @@ namespace KAST.Infratructure.Migrations
 
                     b.HasOne("KAST.Domain.Entities.Squad", "Side")
                         .WithMany("MissionUsers")
-                        .HasForeignKey("SquadID");
+                        .HasForeignKey("SquadID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("KAST.Domain.Entities.User", "User")
                         .WithMany()
@@ -371,6 +454,15 @@ namespace KAST.Infratructure.Migrations
                     b.Navigation("Side");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("KAST.Domain.Entities.Mod", b =>
+                {
+                    b.HasOne("KAST.Domain.Entities.Author", "Author")
+                        .WithMany("mods")
+                        .HasForeignKey("AuthorId");
+
+                    b.Navigation("Author");
                 });
 
             modelBuilder.Entity("KAST.Domain.Entities.Slot", b =>
@@ -407,6 +499,11 @@ namespace KAST.Infratructure.Migrations
                     b.Navigation("Faction");
 
                     b.Navigation("Mission");
+                });
+
+            modelBuilder.Entity("KAST.Domain.Entities.Author", b =>
+                {
+                    b.Navigation("mods");
                 });
 
             modelBuilder.Entity("KAST.Domain.Entities.Faction", b =>
