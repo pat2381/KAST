@@ -10,8 +10,14 @@
         <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
         
         <MudSpacer />
-        <MudSwitch @bind-Value="@_isDarkMode" Color="Color.Primary" Class="ma-4" T="bool" Label="Toggle Light/Dark Mode" />
-        <MudIconButton Icon="@Icons.Material.Filled.MoreVert" Color="Color.Inherit" Edge="Edge.End" />
+        <div Class="d-flex justify-end align-center flex-grow-1 gap-4">
+            <MudAvatar Size="Size.Medium">
+                <MudImage Src="images/mony.jpg"></MudImage>
+            </MudAvatar>
+            <MudText Typo="Typo.subtitle2"> Benutzername</MudText>
+            <MudIconButton Icon="@Icons.Material.Filled.MoreVert" Color="Color.Inherit" Edge="Edge.End" />
+        </div>
+        
     </MudAppBar>
 
     <MudDrawer @bind-Open="_drawerOpen" Elevation="2">

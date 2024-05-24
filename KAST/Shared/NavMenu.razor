@@ -8,7 +8,12 @@
  *@
     <MudNavLink Href="" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Home">Home</MudNavLink>
     <MudNavLink Href="ServerOverview" Match="NavLinkMatch.All" Icon="@Icons.Material.Sharp.SettingsInputComposite">Server Overview</MudNavLink>
-    <MudNavLink Href="Mission/MissionOverview" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Apps">Mission Overview</MudNavLink>
+    
+    <MudNavGroup Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Apps" Title="Missions" Expanded="false">
+        <MudNavLink Href="MissionOverview" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Apps">Mission overview</MudNavLink>
+        <MudNavLink Href="NewMission" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Apps">Add New Mission</MudNavLink>
+    </MudNavGroup>
+    
 
     <MudNavLink Href="mods" Match="NavLinkMatch.Prefix" Icon="@Icons.Custom.Brands.Steam">Mods</MudNavLink>
     @if (servers != null && servers.Count > 0)

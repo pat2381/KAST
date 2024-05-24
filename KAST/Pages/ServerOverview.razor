@@ -1,41 +1,77 @@
 ﻿@page "/ServerOverview"
 
-@inherits LayoutComponentBase
-
 <PageTitle>Server Overview</PageTitle>
 
 <MudText Typo="Typo.h3" GutterBottom="true">Server Overview</MudText>
 <MudText Class="mb-8">This component demonstrates fetching data from the server.</MudText>
 
+<div Class="d-flex justify-end align-center flex-grow-1 gap-1 mb-50">
+    <MudChip Icon="@Icons.Material.Filled.AddCircle" Color="Color.Success" >Add Server</MudChip>
+</div>
+
 <MudLayout Class="d-flex justify-start flex-grow-1 gap-4" Elevation="0">
     <MudPaper Class="rounded-lg" Width="400px">
         <MudCardHeader>
             <CardHeaderContent >
-                <div class ="d-flex flex-grow-1 gap-4">
+                <div class="d-flex flex-grow-1 gap-4">
 
-                    <div class="d-flex flex-grow-1 gap-4">
-                        <MudAvatar Color="Color.Primary">M</MudAvatar>
-                        <MudText Typo="Typo.h6">Server 001</MudText>
+                    <div class="d-flex align-center flex-grow-1 gap-4">
+                        <MudBadge Icon="@Icons.Material.Filled.HighlightOff" Color="Color.Error" Overlap="true" Bordered="true">
+                            <MudAvatar Color="Color.Primary">1</MudAvatar>
+                        </MudBadge>
+                        <div>
+                            <MudText Typo="Typo.h6">Server 001</MudText>
+                            <MudText Typo="Typo.caption">Port: 2327</MudText>
+                        </div>
+
                         
                     </div>
-
                     <div class="d-flex align-content-end">
-                        <MudChip  Variant="Variant.Outlined">Pid: 28372</MudChip>
+                        <MudChip  Variant="Variant.Outlined">OFF</MudChip>
                     </div>
 
                 </div>
-               
-
-                
             </CardHeaderContent>
-            
         </MudCardHeader>
+        <MudDivider DividerType="DividerType.Middle" />
         <MudCardContent>
             <MudText>This day everything happened.</MudText>
             <MudText Typo="Typo.body2">The quick, brown fox jumps over a lazy dog.</MudText>
         </MudCardContent>
-        <MudCardActions>
-            <MudButton Variant="Variant.Text" Color="Color.Primary">Read More</MudButton>
+        <MudCardActions Class="d-flex flex-row flex-grow-1 gap-4" Elevation="0">
+            <MudButton Class="rounded-lg align-content-start" Variant="Variant.Filled" Color="Color.Success">Start Server</MudButton>
+            <MudButton Class="rounded-lg align-content-end" Variant="Variant.Outlined" Color="Color.Error">Server entfernen</MudButton>
+        </MudCardActions>
+    </MudPaper>
+
+    <MudPaper Class="rounded-lg" Width="400px" Height="auto">
+        <MudCardHeader>
+            <CardHeaderContent>
+                <div class="d-flex flex-grow-1 gap-4">
+
+                    <div class="d-flex align-center flex-grow-1 gap-4">
+                        <MudBadge  Color="Color.Success" Overlap="true" Bordered="true">
+                            <MudAvatar Color="Color.Primary">2</MudAvatar>
+                        </MudBadge>
+                        <div>
+                            <MudText Typo="Typo.h6">Server 002</MudText>
+                            <MudText Typo="Typo.caption">Port: 2332</MudText>
+                        </div>
+                    </div>
+                    <div class="d-flex align-content-end">
+                        <MudChip Variant="Variant.Outlined">PID: 28372</MudChip>
+                    </div>
+                </div>
+            </CardHeaderContent>
+        </MudCardHeader>
+        <MudDivider DividerType="DividerType.Middle" />
+        <MudCardContent>
+            <MudText>This day everything happened.</MudText>
+            <MudText Typo="Typo.body2">The quick, brown fox jumps over a lazy dog.</MudText>
+        </MudCardContent>
+        <MudCardActions Class="d-flex flex-row flex-grow-1 gap-4" Elevation="0">
+            <MudButton Class="rounded-lg align-content-start" Variant="Variant.Filled" Color="Color.Secondary">Stop</MudButton>
+            <MudButton Class="rounded-lg align-content-end" Variant="Variant.Outlined" Color="Color.Error" Disabled="true">Server entfernen</MudButton>
         </MudCardActions>
     </MudPaper>
 

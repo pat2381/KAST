@@ -1,11 +1,20 @@
-﻿@page "/Mission/MissionOverview"
+﻿@page "/MissionOverview"
 
-<PageTitle>Mission Overview</PageTitle>
+@inject IDialogService DialogService
+
+
+
+<PageTitle>Mission Events Overview</PageTitle>
 
 <MudText Typo="Typo.h3" GutterBottom="true">Mission Overview</MudText>
 <MudText Class="mb-8">This component demonstrates fetching data from the server.</MudText>
 
+<div Class="d-flex justify-end align-center flex-grow-1 gap-1 mb-50">
+    <MudChip Icon="@Icons.Material.Filled.AddCircle" Color="Color.Success">Add Mission</MudChip>
 
+    @* <MudIconButton Size="Size.Large" Icon="@Icons.Material.Filled.AddCircle" Color="Color.Success" aria-label="github"></MudIconButton>
+    <MudText Typo="Typo.h6">Add Server</MudText> *@
+</div>
 
 
 <MudLayout Class="d-flex justify-start flex-grow-1 gap-4" Elevation="0">
@@ -58,13 +67,13 @@
         </MudCardContent>
         <MudCardActions>
             <MudTooltip Text="Zur Mission anmelden">
-                <MudButton Variant="Variant.Text" Color="Color.Primary">Anmelden</MudButton>
+                <MudButton Variant="Variant.Text" Color="Color.Primary" OnClick="OnButtonClick">Anmelden</MudButton>
             </MudTooltip>
             <MudSpacer />
             <MudIconButton Icon="@Icons.Material.Filled.Favorite" Color="Color.Default" />
             <MudIconButton Icon="@Icons.Material.Filled.Share" Color="Color.Default" />
             <MudTooltip Text="Download Mission">
-                <MudIconButton Icon="@Icons.Material.Filled.Download" Color="Color.Success"  />
+                <MudIconButton Icon="@Icons.Material.Filled.Download" Color="Color.Success" OnClick="OpenDialog"  />
             </MudTooltip>
 
         </MudCardActions>
@@ -76,5 +85,6 @@
 
 
 @code {
-
+    
+    //Code is in partial Class 
 }
