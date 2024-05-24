@@ -1,9 +1,37 @@
 ﻿@page "/ServerOverview"
 
+@inherits LayoutComponentBase
+
 <PageTitle>Server Overview</PageTitle>
 
 <MudText Typo="Typo.h3" GutterBottom="true">Server Overview</MudText>
 <MudText Class="mb-8">This component demonstrates fetching data from the server.</MudText>
+
+<MudLayout Class="d-flex justify-start flex-grow-1 gap-4" Elevation="0">
+    <MudPaper Class="rounded-lg" Width="400px">
+        <MudCardHeader>
+            <CardHeaderContent >
+                <div class="d-flex flex-grow-1 gap-4">
+                    <MudAvatar Color="Color.Primary">M</MudAvatar>
+                    <MudText Typo="Typo.h6">Server 001</MudText>
+                    <MudAvatar Class="align-content-end" Color="Color.Primary">M</MudAvatar>
+                </div>
+
+                
+            </CardHeaderContent>
+            
+        </MudCardHeader>
+        <MudCardContent>
+            <MudText>This day everything happened.</MudText>
+            <MudText Typo="Typo.body2">The quick, brown fox jumps over a lazy dog.</MudText>
+        </MudCardContent>
+        <MudCardActions>
+            <MudButton Variant="Variant.Text" Color="Color.Primary">Read More</MudButton>
+        </MudCardActions>
+    </MudPaper>
+
+</MudLayout>
+
 
 @code {
 
