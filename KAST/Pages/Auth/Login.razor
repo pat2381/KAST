@@ -1,0 +1,99 @@
+﻿@page "/Login"
+@using KAST.Authentication
+@using KAST.Domain.Entities
+@using KAST.Infratructure.Servcies;
+
+@inject ISnackbar SnackbarService
+@inject UserAccountService userAccountService
+@inject AuthenticationStateProvider authStateProvider
+@inject NavigationManager navManager
+
+
+<MudContainer MaxWidth="MaxWidth.Small" Class="d-flex flex-column align-content-center my-5">
+    <MudPaper Elevation="15" Class="rounded-lg">
+        <MudGrid Justify="Justify.Center">
+            <div class="d-flex justify-center mt-10">
+                <MudImage Src="image/Logo_white_xl.png" Width="250" Height="100"/>
+            </div>
+            <MudItem xs="12" Class="d-flex justify-center">
+                <MudText Typo="Typo.h4" Align="Align.Center" Class="mb-4">Willkommen zurück!</MudText>
+            </MudItem>
+            <MudItem xs="10 ">
+                <MudTextField @bind-Value="@model.Username" Label="Benutzername" Required="true" FullWidth="true" />
+            </MudItem>
+            <MudItem xs="10">
+                <MudTextField @bind-Value="@model.Password" Label="Passwort" InputType="InputType.Password" Required="true" FullWidth="true" />
+            </MudItem>
+            <MudItem xs="6" class="mt-4">
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="Authenticate" FullWidth="true" Class="mb-10 rounded-lg">Login</MudButton>
+            </MudItem>
+            @* <MudItem xs="12" class="text-center">
+                @if (!string.IsNullOrEmpty(ErrorMessage))
+                {
+                    <MudText Typo="Typo.body2" Color="Color.Error">@ErrorMessage</MudText>
+                }
+            </MudItem> *@
+        </MudGrid>
+    </MudPaper>
+</MudContainer>
+
+
+@* <MudContainer Class="mt-16 rounded-lg" MaxWidth="MaxWidth.Small">
+    <MudCard Class="rounded-lg">
+       <MudCardHeader>
+            <div Class="d-flex justify-center mt-10">
+                <MudImage Src="image/logo_white_xl.png" Width="200" Height="80"></MudImage>
+            </div>
+       </MudCardHeader>
+       <MudCardContent>
+            <MudGrid Spacing="3" Class=" d-flex mt-16 mb-16 ma-10">
+                <MudItem xs="9">
+                    <MudText Typo="Typo.h5" GutterBottom="true">Login</MudText>
+
+                    <MudItem xs="12">
+                        <MudTextField T="string" @bind-Value="@model.Username" Variant="Variant.Outlined" Label="Benutzername" />
+                    </MudItem>
+                    <MudItem xs="12">
+                        <MudTextField @bind-Value="@model.Password" Label="Password" Variant="Variant.Outlined" InputType="InputType.Password" />
+                    </MudItem>
+
+                    <MudItem xs="12" Class="d-flex justify-center">
+                        <MudButton OnClick="Authenticate" Variant="Variant.Filled" DisableElevation="true" Color="Color.Primary" Size="Size.Large" Class="mt-8">Login</MudButton>
+                    </MudItem>
+
+                </MudItem>
+            </MudGrid>
+       </MudCardContent>
+   </MudCard>
+</MudContainer>
+ *@
+
+@code {
+
+    private class Model
+    {
+        public string Username { get; set; }
+        public string Password { get; set; }
+    }
+
+    private Model model = new Model();
+
+    private async Task Authenticate()
+    {
+        var userAccount = userAccountService.GetByUserName(model.Username);
+        if(userAccount == null || userAccount.Password != model.Password)
+        {
+            SnackbarService.Add("Invaild Username oder Password");
+            return;
+        }
+
+        var cutomAuthStateProvider = (CustomAuthenticationStateProvider)authStateProvider;
+        await cutomAuthStateProvider.UpdateAuthenticationState(new UserSession
+        {
+            Username = userAccount.Username,
+            Role = userAccount.Role
+        });
+        navManager.NavigateTo("/", true);
+    }
+
+}

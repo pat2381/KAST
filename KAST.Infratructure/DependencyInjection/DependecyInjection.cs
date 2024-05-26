@@ -10,6 +10,7 @@ using KAST.Infratructure.Interfaces;
 using KAST.Infratructure.Servcies;
 
 
+
 namespace KAST.Infratructure.DependencyInjection
 {
     public static class DependecyInjection

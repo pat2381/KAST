@@ -1,5 +1,10 @@
 ﻿
+@using KAST.Authentication
 @using KAST.Domain.Entities
+
+@inject AuthenticationStateProvider authStateProvider
+@inject NavigationManager navManager
+
 <MudNavMenu Color="Color.Info" Bordered="true">
 
 @*     <MudNavLink Href="" Match="NavLinkMatch.All" Icon="@Icons.Sharp.Home">Home</MudNavLink>
@@ -7,36 +12,42 @@
     <MudNavLink Href="fetchdata" Match="NavLinkMatch.Prefix" Icon="@Icons.Sharp.List">Fetch data</MudNavLink>
  *@
     <MudNavLink Href="" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Home">Home</MudNavLink>
-    <MudNavLink Href="ServerOverview" Match="NavLinkMatch.All" Icon="@Icons.Material.Sharp.SettingsInputComposite">Server Overview</MudNavLink>
-    
-    <MudNavGroup Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Apps" Title="Missions" Expanded="false">
-        <MudNavLink Href="MissionOverview" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Apps">Mission overview</MudNavLink>
-        <MudNavLink Href="NewMission" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Apps">Add New Mission</MudNavLink>
-    </MudNavGroup>
-    
 
-    <MudNavLink Href="mods" Match="NavLinkMatch.Prefix" Icon="@Icons.Custom.Brands.Steam">Mods</MudNavLink>
-    @if (servers != null && servers.Count > 0)
-    {
-        <MudNavGroup Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Sharp.Storage" Title="Servers" Expanded=false>
-            @foreach (var server in servers)
-            {
-                <MudNavLink Href="@("/server/" + server.Id)" Icon="@Icons.Material.Sharp.Terminal">@server.Name</MudNavLink>
-            }
+    <AuthorizeView Roles="Administrator">
+        <MudNavLink Href="ServerOverview" Match="NavLinkMatch.All" Icon="@Icons.Material.Sharp.SettingsInputComposite">Server Overview</MudNavLink>
+
+        <MudNavGroup Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Apps" Title="Missions" Expanded="false">
+            <MudNavLink Href="MissionOverview" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Apps">Mission overview</MudNavLink>
+            <MudNavLink Href="NewMission" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Apps">Add New Mission</MudNavLink>
         </MudNavGroup>
-    }
-    
+
+
+        <MudNavLink Href="mods" Match="NavLinkMatch.Prefix" Icon="@Icons.Custom.Brands.Steam">Mods</MudNavLink>
+        @if (servers != null && servers.Count > 0)
+        {
+            <MudNavGroup Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Sharp.Storage" Title="Servers" Expanded=false>
+                @foreach (var server in servers)
+                {
+                    <MudNavLink Href="@("/server/" + server.Id)" Icon="@Icons.Material.Sharp.Terminal">@server.Name</MudNavLink>
+                }
+            </MudNavGroup>
+        }
+    </AuthorizeView>
 </MudNavMenu>
 
 <MudSpacer />
+<AuthorizeView Roles="Administrator, User">
+    <Authorized>
+        <MudNavMenu Rounded="true">
+            <MudNavLink Href="serverinfos" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Sharp.Computer" IconColor="Color.Primary">Server Status</MudNavLink>
+            <MudNavLink Href="infos" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Sharp.Info" IconColor="Color.Primary">Informations</MudNavLink>
+            <MudNavLink Href="settings" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Sharp.Settings" IconColor="Color.Primary">Settings</MudNavLink>
+            <MudDivider />
+            <MudNavLink OnClick="LogOut" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Logout" IconColor="Color.Secondary">Abmelden</MudNavLink>
+        </MudNavMenu>
+    </Authorized>
+</AuthorizeView>
 
-<MudNavMenu Rounded="true">
-    <MudNavLink Href="serverinfos" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Sharp.Computer" IconColor="Color.Primary">Server Status</MudNavLink>
-    <MudNavLink Href="infos" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Sharp.Info" IconColor="Color.Primary">Informations</MudNavLink>
-    <MudNavLink Href="settings" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Sharp.Settings" IconColor="Color.Primary">Settings</MudNavLink>
-    <MudDivider/>
-    <MudNavLink Href="settings" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Logout" IconColor="Color.Secondary">Abmelden</MudNavLink>
-</MudNavMenu>
 
 @code
 {
@@ -49,4 +60,12 @@
             servers.Add(new Server{ Name=$"Server {i}", Id = Guid.NewGuid()});
         }
     }
+
+    private async Task LogOut()
+    {
+        var customAuthStateProvider = (CustomAuthenticationStateProvider)authStateProvider;
+        await customAuthStateProvider.UpdateAuthenticationState(null);
+        navManager.NavigateTo("/", true);
+    }
+
 }
