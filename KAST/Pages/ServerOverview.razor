@@ -1,5 +1,5 @@
 ﻿@page "/ServerOverview"
-@attribute [Authorize(Roles = "Administrator")]
+@attribute [Authorize(Roles = "Admin, User")]
 
 <PageTitle>Server Overview</PageTitle>
 
@@ -11,7 +11,7 @@
 </div>
 
 <MudLayout Class="d-flex justify-start flex-grow-1 gap-4" Elevation="0">
-    <MudPaper Class="rounded-lg" Width="400px">
+    <MudPaper Class="rounded-lg" Width="400px" Elevation="10">
         <MudCardHeader>
             <CardHeaderContent >
                 <div class="d-flex flex-grow-1 gap-4">
@@ -45,7 +45,7 @@
         </MudCardActions>
     </MudPaper>
 
-    <MudPaper Class="rounded-lg" Width="400px" Height="auto">
+    <MudPaper Class="rounded-lg" Width="400px" Height="auto" Elevation="10">
         <MudCardHeader>
             <CardHeaderContent>
                 <div class="d-flex flex-grow-1 gap-4">

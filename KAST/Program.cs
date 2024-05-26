@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
 using Microsoft.AspNetCore.Components.Authorization;
 using KAST.Infratructure.Servcies;
 using KAST.Authentication;
+using KAST;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,6 +37,7 @@ var builder = WebApplication.CreateBuilder(args);
 //});
 
 builder.Services.AddLocalization();
+builder.Services.AddControllers();
 
 builder.Services.AddAuthenticationCore();
 // Add services to the container.
@@ -46,15 +48,23 @@ builder.Services.AddScoped<ProtectedSessionStorage>();
 builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
 
 builder.Services.AddInfratruture(builder.Configuration);
-builder.Services.AddSingleton<UserAccountService>();
+builder.Services.AddScoped<UserAccountService>();
 
 builder.Services.AddSingleton<WeatherForecastService>(); 
 builder.Services.AddSingleton<ServerInfoService>();
+builder.Services.AddMudTheme();
 builder.Services.AddMudServices();
 
 var app = builder.Build();
 
+//Add
+string[] supportedCultures = ["de-De", "en-Us"];
+var localizationOptions = new RequestLocalizationOptions()
+    .SetDefaultCulture(supportedCultures[0])
+    .AddSupportedCultures(supportedCultures)
+    .AddSupportedUICultures(supportedCultures);
 
+app.UseRequestLocalization(localizationOptions);
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -65,30 +75,33 @@ if (!app.Environment.IsDevelopment())
 }
 
 
-using (IServiceScope serviceScope = app.Services.CreateScope())
-{
-    //Apply last Entity Framework migration
-    try
-    {
-        ApplicationDbContext? context = serviceScope.ServiceProvider.GetService<ApplicationDbContext>();
+//using (IServiceScope serviceScope = app.Services.CreateScope())
+//{
+//    //Apply last Entity Framework migration
+//    try
+//    {
+//        ApplicationDbContext? context = serviceScope.ServiceProvider.GetService<ApplicationDbContext>();
 
-        if (app.Environment.IsDevelopment())
-        {
-            context?.Database.EnsureDeleted();
-            context?.Database.EnsureCreated();
-        }
-        else
-            context?.Database.Migrate();
-    }
-    catch (Exception) { throw; }
-}
+//        if (app.Environment.IsDevelopment())
+//        {
+//            context?.Database.EnsureDeleted();
+//            context?.Database.EnsureCreated();
+//        }
+//        else
+//            context?.Database.Migrate();
+//    }
+//    catch (Exception) { throw; }
+//}
 
 app.UseHttpsRedirection();
 
 app.UseStaticFiles();
+app.UseAntiforgery();
+
 
 app.UseRouting();
 
+app.MapControllers();
 app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");
 

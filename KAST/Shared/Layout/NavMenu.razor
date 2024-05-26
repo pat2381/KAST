@@ -5,23 +5,41 @@
 @inject AuthenticationStateProvider authStateProvider
 @inject NavigationManager navManager
 
+@inject IStringLocalizer<Resource> localizer
+
+
 <MudNavMenu Color="Color.Info" Bordered="true">
 
 @*     <MudNavLink Href="" Match="NavLinkMatch.All" Icon="@Icons.Sharp.Home">Home</MudNavLink>
     <MudNavLink Href="counter" Match="NavLinkMatch.Prefix" Icon="@Icons.Sharp.Add">Counter</MudNavLink>
     <MudNavLink Href="fetchdata" Match="NavLinkMatch.Prefix" Icon="@Icons.Sharp.List">Fetch data</MudNavLink>
  *@
-    <MudNavLink Href="" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Home">Home</MudNavLink>
+    <MudNavLink Href="" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Home">@localizer["Home"]</MudNavLink>
 
-    <AuthorizeView Roles="Administrator">
+
+    <AuthorizeView Roles="Admin, OwnerAdmin, User, Moderate">
         <MudNavLink Href="ServerOverview" Match="NavLinkMatch.All" Icon="@Icons.Material.Sharp.SettingsInputComposite">Server Overview</MudNavLink>
 
+
+    </AuthorizeView>
+
+    <MudDivider />
+
+    <AuthorizeView Roles="Admin, Modarate">
+
+        <div class="mt-3 mb-2 ml-2 d-flex">
+            <MudIcon class="align-center" Icon="@Icons.Material.Sharp.Fitbit" Color="Color.Primary"></MudIcon>
+            <MudText Class="ml-2 align-center" Typo="Typo.button">Missions</MudText>
+        </div>
+
         <MudNavGroup Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Apps" Title="Missions" Expanded="false">
-            <MudNavLink Href="MissionOverview" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Apps">Mission overview</MudNavLink>
-            <MudNavLink Href="NewMission" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Apps">Add New Mission</MudNavLink>
+            <MudNavLink Href="MissionOverview" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Apps">Mission overview</MudNavLink>
+            <MudNavLink Href="NewMission" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Apps">Add New Mission</MudNavLink>
         </MudNavGroup>
-
-
+        <div class="mt-3 mb-2 ml-2 d-flex">
+            <MudIcon class="align-center" Icon="@Icons.Material.Sharp.Fitbit" Color="Color.Primary"></MudIcon>
+            <MudText Class="ml-2 align-center" Typo="Typo.button">Server</MudText>
+        </div>
         <MudNavLink Href="mods" Match="NavLinkMatch.Prefix" Icon="@Icons.Custom.Brands.Steam">Mods</MudNavLink>
         @if (servers != null && servers.Count > 0)
         {
@@ -36,8 +54,12 @@
 </MudNavMenu>
 
 <MudSpacer />
-<AuthorizeView Roles="Administrator, User">
+<AuthorizeView Roles="Admin">
     <Authorized>
+        <div class="mt-3 mb-2 ml-2 d-flex">
+            <MudIcon class="align-center" Icon="@Icons.Material.Sharp.Fitbit" Color="Color.Primary"></MudIcon>
+            <MudText Class="ml-2 align-center" Color="Color.Error" Typo="Typo.button">Admin</MudText>
+        </div>
         <MudNavMenu Rounded="true">
             <MudNavLink Href="serverinfos" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Sharp.Computer" IconColor="Color.Primary">Server Status</MudNavLink>
             <MudNavLink Href="infos" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Sharp.Info" IconColor="Color.Primary">Informations</MudNavLink>
@@ -46,6 +68,15 @@
             <MudNavLink OnClick="LogOut" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Logout" IconColor="Color.Secondary">Abmelden</MudNavLink>
         </MudNavMenu>
     </Authorized>
+    <NotAuthorized>
+
+        <MudNavMenu Rounded="true">
+
+            <MudDivider />
+            <MudNavLink OnClick="LogOut" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Logout" IconColor="Color.Secondary">Abmelden</MudNavLink>
+        </MudNavMenu>
+    </NotAuthorized>
+   
 </AuthorizeView>
 
 

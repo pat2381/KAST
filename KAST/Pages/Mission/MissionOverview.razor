@@ -1,7 +1,7 @@
 ﻿@page "/MissionOverview"
 
 @inject IDialogService DialogService
-@attribute [Authorize(Roles ="Administrator")]
+@attribute [Authorize(Roles ="Admin, Moderate, User")]
 
 
 <PageTitle>Mission Events Overview</PageTitle>
@@ -18,7 +18,7 @@
 
 
 <MudLayout Class="d-flex justify-start flex-grow-1 gap-4" Elevation="0">
-    <MudCard Class="rounded-lg">
+    <MudCard Class="rounded-lg" Elevation="10">
         <MudCardHeader>
             <CardHeaderAvatar>
                 <MudAvatar Color="Color.Secondary">I</MudAvatar>
@@ -46,7 +46,7 @@
         </MudCardActions>
     </MudCard>
 
-    <MudCard Class="rounded-lg">
+    <MudCard Class="rounded-lg" Elevation="10">
         <MudCardHeader>
             <CardHeaderAvatar>
                 <MudBadge Color="Color.Error" Icon="@Icons.Material.Filled.Remove" Overlap="true" Bordered="true">

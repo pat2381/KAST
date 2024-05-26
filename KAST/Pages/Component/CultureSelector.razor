@@ -1,0 +1,47 @@
+﻿
+@inject NavigationManager navManager
+
+<div class="rounded-lg" style="width:250px">
+    <MudSelect Margin="Margin.Dense" Placeholder="Select culture" @bind-Value="@Culture" Label="Sprache" Variant="Variant.Text" DisableUnderLine="true" >
+        <MudSelectItem Value="@(CultureInfo.GetCultureInfo("de-DE"))">
+            <img src="https://flagcdn.com/de.svg" height="14" class="mr-1" /> German
+        </MudSelectItem>
+        <MudSelectItem Value="@(CultureInfo.GetCultureInfo("en-US"))">
+            <img src="https://flagcdn.com/us.svg" height="14" class="mr-1" /> English
+        </MudSelectItem>
+    </MudSelect>
+</div>
+
+
+@code {
+
+    private Func<CultureInfo, string> convertFunc = ci => ci.DisplayName;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        Culture = CultureInfo.CurrentCulture;
+    }
+
+    private CultureInfo Culture
+    {
+        get
+        {
+            return CultureInfo.CurrentCulture;
+        }
+        set
+        {
+            if(CultureInfo.CurrentCulture != value)
+            {
+                var uri = new Uri(navManager.Uri).GetComponents(UriComponents.PathAndQuery, UriFormat.Unescaped);
+                var cultureEscaped = Uri.EscapeDataString(value.Name);
+                var uriEscaped = Uri.EscapeDataString(uri);
+
+                navManager.NavigateTo($"Culture/Set?culture={cultureEscaped}&redirectUri={uriEscaped}", true);
+            }
+        }
+    }
+}
+
+      

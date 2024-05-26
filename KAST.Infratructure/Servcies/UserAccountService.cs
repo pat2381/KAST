@@ -1,4 +1,5 @@
 ﻿using KAST.Domain.Entities;
+using KAST.Infratructure.Data;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
@@ -10,21 +11,18 @@ namespace KAST.Infratructure.Servcies
 {
     public class UserAccountService
     {
-        private List<User> Users;
+        
+        private readonly ApplicationDbContext context;
 
+        public UserAccountService(ApplicationDbContext dbContext) => context = dbContext;
+       
 
-        public UserAccountService()
+        public User GetByUserName(string userName)
         {
-            Users = new List<User>
-            {
-                new User{ UserId = new Guid(), Username = "admin" ,Password="admin", Role="Administrator"},
-                new User{ UserId = new Guid(), Username = "user" ,Password="user", Role="User"},
-            };
+            return context.Users.FirstOrDefault(u => u.Username == userName);
         }
 
-        public User? GetByUserName(string userName)
-        {
-            return Users.FirstOrDefault(x => x.Username == userName);
-        }
+
+
     }
 }

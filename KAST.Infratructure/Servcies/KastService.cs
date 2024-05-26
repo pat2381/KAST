@@ -15,5 +15,7 @@ namespace KAST.Infratructure.Servcies
         }
 
         public IRepositoryService RepositoryService => new RepositoryService(context);
+
+
     }
 }
