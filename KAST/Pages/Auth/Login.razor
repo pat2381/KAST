@@ -2,50 +2,91 @@
 @using KAST.Authentication
 @using KAST.Domain.Entities
 @using KAST.Infratructure.Servcies;
+@using System.ComponentModel.DataAnnotations
 
 @inject ISnackbar SnackbarService
 @inject UserAccountService userAccountService
 @inject AuthenticationStateProvider authStateProvider
 @inject NavigationManager navManager
 
+<PageTitle>Anmeldung</PageTitle>
 
-<MudContainer MaxWidth="MaxWidth.Small" Class="d-flex flex-column align-content-center my-5">
-
-    <MudPaper Elevation="15" Class="rounded-lg">
-        <MudGrid Justify="Justify.Center">
-            <div class="d-flex justify-center mt-10">
-                <MudImage Src="image/Logo_white_sh.png" Width="300" Height="120"/>
+<div class="d-flex flex-column gap-y-3">
+    <div class="d-flex flex-column">
+        <EditForm Model="model" method="post" OnValidSubmit="@Authenticate" FormName="login">
+            <DataAnnotationsValidator/>
+            <MudText Typo="Typo.h4" GutterBottom="true">Anmelden</MudText>
+            <MudText>
+                Du hast keinen Account? <MudLink Href="" Target="_self">Register</MudLink>
+            </MudText>
+            <StatusMessage Message="Error" Error="true"/>
+            <div class="mud-input-control mud-input-input-control my-4">
+                <div class="mud-input-control-input-container">
+                    <!--!--><!--!-->
+                    <div class="mud-input mud-input-outlined mud-shrink">
+                        <InputText @bind-Value="model.Username" class="mud-input-slot mud-input-root mud-input-root-outlined" type="text" autocomplete="@model.Username" aria-required="true" placeholder="user name"/>
+                        <div class="mud-input-slot mud-input-root mud-input-root-outlined" style="display:none"></div>
+                        <!--!-->
+                        <div class="mud-input-outlined-border"></div>
+                    </div>
+                    <!--!-->
+                    <label class="mud-input-label mud-input-label-animated mud-input-label-outlined mud-input-label-inputcontrol" for="userName">Benutzername</label>
+                </div>
+                <div class="mud-input-helper-text mud-input-error">
+                    <div class="d-flex">
+                        <ValidationMessage For="() => model.Username" class="mud-input-error"/>
+                    </div>
+                </div>
             </div>
-            <MudItem xs="12" Class="d-flex justify-center">
-                <MudText Typo="Typo.h4" Align="Align.Center" Class="mb-4">Willkommen zurück!</MudText>
-            </MudItem>
-            <MudItem xs="10">
-                <MudPaper Class="rounded-lg px-2" Elevation="2">
-                    <MudTextField @bind-Value="@model.Username" Label="Benutzername" Required="true" Variant="Variant.Text" DisableUnderLine="true" FullWidth="true" Margin="Margin.Dense" />
-                </MudPaper>
-            </MudItem>
+            <div class="mud-input-control mud-input-input-control my-4">
+                <div class="mud-input-control-input-container">
+                    <!--!--><!--!-->
+                    <div class="mud-input mud-input-outlined mud-shrink">
+                        <InputText type="password" @bind-Value="model.Password" class="mud-input-slot mud-input-root mud-input-root-outlined" autocomplete="current-password" aria-required="true" placeholder="password"/>
+                        <div class="mud-input-slot mud-input-root mud-input-root-outlined" style="display:none"></div>
+                        <!--!-->
+                        <div class="mud-input-outlined-border"></div>
+                    </div>
+                    <!--!-->
+                    <label class="mud-input-label mud-input-label-animated mud-input-label-outlined mud-input-label-inputcontrol" for="password">Passwort</label>
+                </div>
+                <div class="mud-input-helper-text mud-input-error">
+                    <div class="d-flex">
+                        <ValidationMessage For="() => model.Password" class="mud-input-error"/>
+                    </div>
+                </div>
+            </div>
+            <div Class="d-flex justify-space-between align-center mb-1">
+                <label class="form-label">
+                    <InputCheckbox @bind-Value="model.RememberMe" class="form-check-input"/>
+                   Login merken
+                </label>
+                <MudLink Href="">Password vergessen</MudLink>
+            </div>
 
-            <MudItem xs="10">
-                <MudPaper Class="rounded-lg px-2" Elevation="2">
-                    <MudTextField @bind-Value="@model.Password" Label="Passwort" InputType="InputType.Password" Variant="Variant.Text" DisableUnderLine="true" Required="true" FullWidth="false" Margin="Margin.Dense"/>
-                </MudPaper>
+            <MudButton Variant="Variant.Filled"
+                       Color="Color.Primary"
+                       Size="Size.Large"
+                       ButtonType="ButtonType.Submit"
+                       FullWidth="true">
+                <MudText>Anmelden</MudText>
+            </MudButton>
+        </EditForm>
 
-            </MudItem>
-            <MudItem xs="6" class="mt-4">
-                <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="Authenticate" FullWidth="true" Class="mb-10 rounded-lg">Login</MudButton>
-            </MudItem>
-        </MudGrid>
-    </MudPaper>
-</MudContainer>
+    </div>
+    <div class="d-flex flex-column">
 
+        <ExternalLoginPicker/>
 
+    </div>
+</div>
 
 @code {
-
     private class Model
     {
         public string? Username { get; set; }
         public string? Password { get; set; }
+        public bool RememberMe { get; set; }
     }
 
     private Model model = new Model();
@@ -53,7 +94,7 @@
     private async Task Authenticate()
     {
         var userAccount = userAccountService.GetByUserName(model.Username);
-        if(userAccount == null || userAccount.Password != model.Password)
+        if (userAccount == null || userAccount.Password != model.Password)
         {
             SnackbarService.Add("Invaild Username oder Password");
             return;
@@ -61,11 +102,12 @@
 
         var cutomAuthStateProvider = (CustomAuthenticationStateProvider)authStateProvider;
         await cutomAuthStateProvider.UpdateAuthenticationState(new UserSession
-        {
-            Username = userAccount.Username,
-            Role = userAccount.Role
-        });
+            {
+                Username = userAccount.Username,
+                Role = userAccount.Role
+            });
         navManager.NavigateTo("/", true);
     }
+
 
 }

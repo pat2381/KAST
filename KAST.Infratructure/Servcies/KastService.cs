@@ -1,10 +1,10 @@
 ﻿using KAST.Application.Repositories;
-using KAST.Infratructure.Data;
-using KAST.Infratructure.Data.Repositories;
-using KAST.Infratructure.Interfaces;
+using KAST.Infrastructure.Data;
+using KAST.Infrastructure.Data.Repositories;
+using KAST.Infrastructure.Interfaces;
 
 
-namespace KAST.Infratructure.Servcies
+namespace KAST.Infrastructure.Servcies
 {
     public class KastService : IKastService
     {

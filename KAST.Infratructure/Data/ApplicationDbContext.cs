@@ -7,7 +7,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KAST.Infratructure.Data
+namespace KAST.Infrastructure.Data
 {
     public class ApplicationDbContext : DbContext
     {

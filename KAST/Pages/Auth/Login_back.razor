@@ -1,0 +1,71 @@
+﻿@page "/Loginneu"
+@using KAST.Authentication
+@using KAST.Domain.Entities
+@using KAST.Infratructure.Servcies;
+
+@inject ISnackbar SnackbarService
+@inject UserAccountService userAccountService
+@inject AuthenticationStateProvider authStateProvider
+@inject NavigationManager navManager
+
+
+<MudContainer MaxWidth="MaxWidth.Small" Class="d-flex flex-column align-content-center my-5">
+
+    <MudPaper Elevation="15" Class="rounded-lg">
+        <MudGrid Justify="Justify.Center">
+            <div class="d-flex justify-center mt-10">
+                <MudImage Src="image/Logo_white_sh.png" Width="300" Height="120"/>
+            </div>
+            <MudItem xs="12" Class="d-flex justify-center">
+                <MudText Typo="Typo.h4" Align="Align.Center" Class="mb-4">Willkommen zurück!</MudText>
+            </MudItem>
+            <MudItem xs="10">
+                <MudPaper Class="rounded-lg px-2" Elevation="2">
+                    <MudTextField @bind-Value="@model.Username" Label="Benutzername" Required="true" Variant="Variant.Text" DisableUnderLine="true" FullWidth="true" Margin="Margin.Dense" />
+                </MudPaper>
+            </MudItem>
+
+            <MudItem xs="10">
+                <MudPaper Class="rounded-lg px-2" Elevation="2">
+                    <MudTextField @bind-Value="@model.Password" Label="Passwort" InputType="InputType.Password" Variant="Variant.Text" DisableUnderLine="true" Required="true" FullWidth="false" Margin="Margin.Dense"/>
+                </MudPaper>
+
+            </MudItem>
+            <MudItem xs="6" class="mt-4">
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="Authenticate" FullWidth="true" Class="mb-10 rounded-lg">Login</MudButton>
+            </MudItem>
+        </MudGrid>
+    </MudPaper>
+</MudContainer>
+
+
+
+@code {
+
+    private class Model
+    {
+        public string? Username { get; set; }
+        public string? Password { get; set; }
+    }
+
+    private Model model = new Model();
+
+    private async Task Authenticate()
+    {
+        var userAccount = userAccountService.GetByUserName(model.Username);
+        if(userAccount == null || userAccount.Password != model.Password)
+        {
+            SnackbarService.Add("Invaild Username oder Password");
+            return;
+        }
+
+        var cutomAuthStateProvider = (CustomAuthenticationStateProvider)authStateProvider;
+        await cutomAuthStateProvider.UpdateAuthenticationState(new UserSession
+        {
+            Username = userAccount.Username,
+            Role = userAccount.Role
+        });
+        navManager.NavigateTo("/", true);
+    }
+
+}

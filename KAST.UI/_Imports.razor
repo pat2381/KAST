@@ -1,0 +1,46 @@
+﻿@using System.Net.Http
+@using System.Net.Http.Json
+@using System.Text
+@using System.Security.Claims
+@using System.Text.Encodings.Web
+@using System.ComponentModel.DataAnnotations
+@using System.Threading
+
+@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.AspNetCore.Components.Routing
+@using Microsoft.AspNetCore.Components.Web
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components.Web.Virtualization
+@using Microsoft.AspNetCore.Authentication
+@using Microsoft.AspNetCore.Http.Features
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.WebUtilities
+
+@using Microsoft.Extensions.DependencyInjection
+@using Microsoft.Extensions.Configuration
+@using Microsoft.Extensions.Localization
+@using Microsoft.Extensions.Logging
+@using Microsoft.EntityFrameworkCore
+@using Toolbelt.Blazor.HotKeys2;
+
+@using Microsoft.JSInterop
+@using static Microsoft.AspNetCore.Components.Web.RenderMode
+
+@using KAST.UI
+@using KAST.UI.Components
+@using KAST.UI.Components.Shared.Layout
+@using KAST.UI.Components.Redirections
+@using KAST.UI.Services
+@using KAST.UI.Services.Layout
+@using KAST.UI.Data
+@using MudBlazor
+
+@inject IConfiguration Config
+@inject IAuthorizationService AuthService
+@inject IJSRuntime JS
+@inject ISnackbar Snackbar
+@inject IDialogService DialogService
+
+@inject NavigationManager Navigation

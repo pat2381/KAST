@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KAST.Infratructure.Interfaces
+namespace KAST.Infrastructure.Interfaces
 {
     public interface IKastService
     {

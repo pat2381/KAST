@@ -1,0 +1,55 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <UserSecretsId>aspnet-KAST.UI-3ef09525-3640-41b6-977d-9f725adcbf31</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="Components\Shared\Layout\AccountLayout.razor" />
+    <Content Remove="Components\Shared\Layout\ExternalLoginPicker.razor" />
+    <Content Remove="Components\Shared\Layout\ManageNavMenu.razor" />
+    <Content Remove="Components\Shared\Layout\NavMenu.razor" />
+    <Content Remove="Components\Shared\Layout\RedirectToLogin.razor" />
+    <Content Remove="Components\Shared\Layout\ShowRecoveryCodes.razor" />
+    <Content Remove="Components\Shared\Layout\StatusMessage.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Components\Shared\Layout\MainLayout.razor.css" />
+    <None Remove="Components\Shared\Layout\NavMenu.razor.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="8.0.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.5" />
+    <PackageReference Include="MudBlazor" Version="6.19.1" />
+    <PackageReference Include="Toolbelt.Blazor.HotKeys2" Version="4.1.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Components\Localization\LanguageSelector.razor" />
+    <None Include="Pages\Identity\Authentication\Manage\ChangePassword.razor" />
+    <None Include="Pages\Identity\Authentication\Manage\DeletePersonalData.razor" />
+    <None Include="Pages\Identity\Authentication\Manage\Disable2fa.razor" />
+    <None Include="Pages\Identity\Authentication\Manage\Email.razor" />
+    <None Include="Pages\Identity\Authentication\Manage\EnableAuthenticator.razor" />
+    <None Include="Pages\Identity\Authentication\Manage\ExternalLogins.razor" />
+    <None Include="Pages\Identity\Authentication\Manage\GenerateRecoveryCodes.razor" />
+    <None Include="Pages\Identity\Authentication\Manage\Index.razor" />
+    <None Include="Pages\Identity\Authentication\Manage\PersonalData.razor" />
+    <None Include="Pages\Identity\Authentication\Manage\ResetAuthenticator.razor" />
+    <None Include="Pages\Identity\Authentication\Manage\SetPassword.razor" />
+    <None Include="Pages\Identity\Authentication\Manage\TwoFactorAuthentication.razor" />
+    <None Include="Pages\Identity\Authentication\Manage\_Imports.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\KAST.Infratructure\KAST.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

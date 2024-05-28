@@ -1,17 +1,14 @@
-﻿using KAST.Infratructure.Data;
+﻿
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.EntityFrameworkCore.Sqlite;
-using Microsoft.EntityFrameworkCore.SqlServer;
-using Microsoft.EntityFrameworkCore;
 using KAST.Application.Repositories;
-using KAST.Infratructure.Data.Repositories;
-using KAST.Infratructure.Interfaces;
-using KAST.Infratructure.Servcies;
+using KAST.Infrastructure.Data.Repositories;
+using KAST.Infrastructure.Interfaces;
+using KAST.Infrastructure.Servcies;
+using KAST.Infrastructure.Data;
 
 
 
-namespace KAST.Infratructure.DependencyInjection
+namespace KAST.Infrastructure.DependencyInjection
 {
     public static class DependecyInjection
     {

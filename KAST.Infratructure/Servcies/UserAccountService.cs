@@ -1,5 +1,5 @@
 ﻿using KAST.Domain.Entities;
-using KAST.Infratructure.Data;
+using KAST.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KAST.Infratructure.Servcies
+namespace KAST.Infrastructure.Servcies
 {
     public class UserAccountService
     {

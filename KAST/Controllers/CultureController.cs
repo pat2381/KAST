@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
+using Route = Microsoft.AspNetCore.Mvc.RouteAttribute;
 
 namespace KAST.Controllers
 {
