@@ -7,13 +7,27 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Persistence\Configurations\AuditTrailConfiguration.cs" />
+    <Compile Remove="Persistence\Configurations\CustomerConfiguration.cs" />
+    <Compile Remove="Persistence\Configurations\DataProtectionKeyConfiguration.cs" />
+    <Compile Remove="Persistence\Configurations\DocumentConfiguration.cs" />
+    <Compile Remove="Persistence\Configurations\KeyValueConfiguration.cs" />
+    <Compile Remove="Persistence\Configurations\LoggerConfiguration.cs" />
+    <Compile Remove="Persistence\Configurations\ProductConfiguration.cs" />
+    <Compile Remove="PermissionSet\Customers.cs" />
+    <Compile Remove="PermissionSet\Documents.cs" />
+    <Compile Remove="PermissionSet\Products.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\KAST.Appliction\KAST.Application.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Azure.Identity" Version="1.11.2" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Abstractions" Version="2.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="8.0.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.5" />

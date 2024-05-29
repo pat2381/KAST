@@ -1,6 +1,7 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+using KAST.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 
 namespace KAST.Domain.Identity;

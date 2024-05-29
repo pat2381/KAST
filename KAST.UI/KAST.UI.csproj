@@ -49,7 +49,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\KAST.Infratructure\KAST.Infrastructure.csproj" />
+    <ProjectReference Include="..\KAST.Migrators.SqLite\KAST.Migrators.SqLite.csproj" />
   </ItemGroup>
 
 </Project>

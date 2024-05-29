@@ -1,5 +1,4 @@
-
-using KAST.UI.Data;
+using KAST.Domain.Identity;
 using KAST.UI.Pages.Identity.Authentication;
 using KAST.UI.Pages.Identity.Authentication.Manage;
 using Microsoft.AspNetCore.Authentication;

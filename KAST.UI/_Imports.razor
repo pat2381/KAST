@@ -34,7 +34,7 @@
 @using KAST.UI.Components.Redirections
 @using KAST.UI.Services
 @using KAST.UI.Services.Layout
-@using KAST.UI.Data
+@using KAST.Domain.Identity
 @using MudBlazor
 
 @inject IConfiguration Config
@@ -44,3 +44,4 @@
 @inject IDialogService DialogService
 
 @inject NavigationManager Navigation
+@inject AuthenticationStateProvider _authenticationStateProvider

@@ -1,4 +1,4 @@
-using KAST.UI.Data;
+using KAST.Domain.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using System.Threading.Tasks;

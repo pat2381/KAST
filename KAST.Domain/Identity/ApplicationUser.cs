@@ -1,6 +1,7 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+using KAST.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -20,6 +21,13 @@ public class ApplicationUser : IdentityUser
     public string? Provider { get; set; } = "Local";
     public string? TenantId { get; set; }
     public virtual Tenant? Tenant { get; set; }
+    public string? SteamName { get; set; }
+    public UInt64 SteamID { get; set; }
+    public int MissionCount { get; set; }
+    public DateTime CreateDate { get; set; }
+    public DateTime LastLogin { get; set; }
+
+
 
     [Column(TypeName = "text")] public string? ProfilePictureDataUrl { get; set; }
 

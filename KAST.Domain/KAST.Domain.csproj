@@ -7,6 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Common\Entities\BaseAuditableEntity.cs" />
+    <Compile Remove="Common\Entities\BaseAuditableSoftDeleteEntity.cs" />
+    <Compile Remove="Common\Entities\BaseEntity.cs" />
+    <Compile Remove="Common\Entities\IAuditTrial.cs" />
+    <Compile Remove="Common\Entities\IMustHaveTenant.cs" />
+    <Compile Remove="Common\Entities\OwnerPropertyEntity.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Constants\" />
   </ItemGroup>
 

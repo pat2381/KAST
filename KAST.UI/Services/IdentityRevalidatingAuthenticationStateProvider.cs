@@ -1,4 +1,4 @@
-using KAST.UI.Data;
+using KAST.Domain.Identity;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Server;
 using Microsoft.AspNetCore.Identity;

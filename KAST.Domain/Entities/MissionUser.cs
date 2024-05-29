@@ -1,4 +1,5 @@
 ﻿using KAST.Domain.Common;
+using KAST.Domain.Identity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -30,6 +31,6 @@ namespace KAST.Domain.Entities
         public Guid UserID { get; set; }
 
         [Display(Name = "Eingetragen")]
-        public User? User { get; set; }
+        public ApplicationUser? User { get; set; }
     }
 }

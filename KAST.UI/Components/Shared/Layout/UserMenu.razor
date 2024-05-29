@@ -80,6 +80,10 @@
 @code
 {
     [Parameter] public EventCallback<EventArgs> OnSettingClick { get; set; }
+
     private bool IsLoading => true;// UserProfileState.Value.IsLoading;
-    private UserProfile? UserProfile => null;
+    private UserProfile? UserProfile;
+
+    
+
 }
